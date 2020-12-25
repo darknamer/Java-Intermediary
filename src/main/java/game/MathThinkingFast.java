@@ -24,7 +24,7 @@ public class MathThinkingFast {
         while (menu != 9) {
             System.out.println("[Main Menu]");
             System.out.println(" 1 New game");
-            System.out.println(" 2 Score");
+            System.out.println(" 2 Show Score");
             System.out.println(" 3 Clear Score");
             System.out.println(" 9 Exit");
 
@@ -67,16 +67,16 @@ public class MathThinkingFast {
 
             switch (menu) {
                 case 1:
-                    this.easyMode();
+                    this.coreGame("Easy", 9);
                     break;
                 case 2:
-                    this.mediumMode();
+                    this.coreGame("Medium", 99);
                     break;
                 case 3:
-                    this.hardMode();
+                    this.coreGame("Hard", 999);
                     break;
                 case 4:
-                    this.varyHardMode();
+                    this.coreGame("Very Hard", 9999);
                     break;
                 case 9:
                     System.out.println("Go to main menu.");
@@ -86,29 +86,7 @@ public class MathThinkingFast {
                     break;
             }
         }
-
     }
-
-    private void easyMode()
-    {
-        this.coreGame("Easy", 9);
-    }
-
-    private void mediumMode()
-    {
-        this.coreGame("Medium", 99);
-    }
-
-    private void hardMode()
-    {
-        this.coreGame("Hard", 999);
-    }
-
-    private void varyHardMode()
-    {
-        this.coreGame("Very Hard", 9999);
-    }
-
 
     private void coreGame(String mode, int maximumNumber)
     {
@@ -131,7 +109,7 @@ public class MathThinkingFast {
             System.out.print("Answer: ");
             int resultOfUser = this.scanner.nextInt();
 
-            if (answer == resultOfUser) {
+            if (answer == resultOfUser) { // Check result and answer is correct?
                 System.out.println("Correct.");
                 score++;
             } else {
@@ -139,14 +117,16 @@ public class MathThinkingFast {
             }
         }
 
-        stopWatch.stop();
+        stopWatch.stop(); // For stopwatch stop
         long timeInUsedBySecond = stopWatch.elapsed(TimeUnit.SECONDS);
+
+        // Show summary your game
         System.out.println("[Finish] ---------------------------------------");
         System.out.println(" - Your name: " + name);
         System.out.printf(" - Your game.score: %d/%d\n", score, maxQuestion);
         System.out.println(" - Your time: " + timeInUsedBySecond + " s.");
         System.out.println(" * Your game.score will be saved.");
-        scoreManager.saveScore(mode, name, score, timeInUsedBySecond);
+        scoreManager.saveScore(mode, name, score, timeInUsedBySecond); // Call function to save score in game
         System.out.println(" * Your game.score was saved.");
         System.out.println("[Game Over] ---------------------------------------");
     }
