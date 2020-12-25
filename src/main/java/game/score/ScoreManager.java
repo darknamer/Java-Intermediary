@@ -1,10 +1,10 @@
-package score;
+package game.score;
 
 import java.io.*;
 import java.time.LocalDateTime;
 
 public class ScoreManager {
-    private String pathFile = "d:\\score.txt";
+    private String pathFile = "d:\\game.score.txt";
 
     public ScoreManager() {
     }
