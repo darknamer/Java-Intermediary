@@ -101,9 +101,6 @@ public class MathThinkingFast {
         Stopwatch stopWatch = Stopwatch.createStarted(); // Start stopwatch to working mode
         int maxQuestion = 10;
         for (int i = 1; i <= maxQuestion; i++) {
-            int firstNumber = random.nextInt(maximumNumber);
-            int secondNumber = random.nextInt(maximumNumber);
-
             int operationNumber = random.nextInt(3);
             MathOperation operation = Plus;
             double answer;
@@ -122,18 +119,29 @@ public class MathThinkingFast {
                     break;
             }
 
+            int firstNumber = random.nextInt(maximumNumber);
+            int secondNumber = random.nextInt(maximumNumber);
+            while (operation == Divided && secondNumber == 0) {
+                secondNumber = random.nextInt(maximumNumber);
+            }
+            String operationSign = "+";
+
             switch (operation) {
                 case Plus:
                     answer = firstNumber + secondNumber;
+                    operationSign = "+";
                     break;
                 case Subtract:
                     answer = firstNumber - secondNumber;
+                    operationSign = "-";
                     break;
                 case Multiply:
                     answer = firstNumber * secondNumber;
+                    operationSign = "x";
                     break;
                 case Divided:
                     answer = firstNumber / secondNumber;
+                    operationSign = "/";
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + operation);
@@ -141,16 +149,16 @@ public class MathThinkingFast {
             
 
             System.out.printf("[%d] ---------------------------------------%n", i);
-            System.out.format("%d + %d = ?%n", firstNumber, secondNumber);
+            System.out.format("%d %s %d = ?%n", firstNumber, operationSign, secondNumber);
             System.out.println("What is the result?");
             System.out.print("Answer: ");
-            int resultOfUser = this.scanner.nextInt();
+            double resultOfUser = this.scanner.nextDouble();
 
             if (answer == resultOfUser) { // Check result and answer is correct?
                 System.out.println("Correct.");
                 score++;
             } else {
-                System.out.println("Incorrect.");
+                System.out.println("Incorrect. - " + answer);
             }
         }
 
