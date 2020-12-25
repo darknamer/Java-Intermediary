@@ -8,6 +8,8 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
+import static game.MathOperation.*;
+
 public class MathThinkingFast {
     private final ScoreManager scoreManager;
     private final Scanner scanner;
@@ -101,7 +103,42 @@ public class MathThinkingFast {
         for (int i = 1; i <= maxQuestion; i++) {
             int firstNumber = random.nextInt(maximumNumber);
             int secondNumber = random.nextInt(maximumNumber);
-            int answer = firstNumber + secondNumber;
+
+            int operationNumber = random.nextInt(3);
+            MathOperation operation = Plus;
+            double answer;
+            switch (operationNumber) {
+                case 0:
+                    operation = Plus;
+                    break;
+                case 1:
+                    operation = Subtract;
+                    break;
+                case 2:
+                    operation = Multiply;
+                    break;
+                case 3:
+                    operation = MathOperation.Divided;
+                    break;
+            }
+
+            switch (operation) {
+                case Plus:
+                    answer = firstNumber + secondNumber;
+                    break;
+                case Subtract:
+                    answer = firstNumber - secondNumber;
+                    break;
+                case Multiply:
+                    answer = firstNumber * secondNumber;
+                    break;
+                case Divided:
+                    answer = firstNumber / secondNumber;
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + operation);
+            }
+            
 
             System.out.printf("[%d] ---------------------------------------%n", i);
             System.out.format("%d + %d = ?%n", firstNumber, secondNumber);
