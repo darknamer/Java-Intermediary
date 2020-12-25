@@ -2,6 +2,8 @@ package game;
 
 import com.google.common.base.Stopwatch;
 import game.score.ScoreManager;
+
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -17,8 +19,7 @@ public class MathThinkingFast {
         this.random = new Random();
     }
 
-    public void initial()
-    {
+    public void initial() throws IOException {
         int menu = 0;
 
         while (menu != 9) {
@@ -39,9 +40,8 @@ public class MathThinkingFast {
                     scoreManager.showScore();
                     break;
                 case 3:
-                    System.out.println("Game is clearing game.score.");
                     scoreManager.clearScore();
-                    System.out.println("Game is cleared game.score.");
+                    System.out.println("Score was clean.");
                     break;
                 case 9:
                     System.out.println("Application is exited.");
@@ -62,6 +62,7 @@ public class MathThinkingFast {
             System.out.println(" 3 Hard (three digits)");
             System.out.println(" 4 Very Hard (four digits)");
             System.out.println(" 9 Exit");
+
             System.out.print("Enter choose menu: ");
             menu = scanner.nextInt();
 
@@ -88,10 +89,9 @@ public class MathThinkingFast {
         }
     }
 
-    private void coreGame(String mode, int maximumNumber)
-    {
-        System.out.println("Enter your name and press key enter and timer will start.");
-        System.out.print("Enter your name for save score game: ");
+    private void coreGame(String mode, int maximumNumber) {
+        System.out.println("Press enter and timer will start.");
+        System.out.print("Enter your name: ");
         String name = this.scanner.next();
 
         int score = 0;
@@ -103,9 +103,9 @@ public class MathThinkingFast {
             int secondNumber = random.nextInt(maximumNumber);
             int answer = firstNumber + secondNumber;
 
-            System.out.printf("[%d] ---------------------------------------\n", i);
-            System.out.format("%d + %d = ?\n", firstNumber, secondNumber);
-            System.out.println("What is result?");
+            System.out.printf("[%d] ---------------------------------------%n", i);
+            System.out.format("%d + %d = ?%n", firstNumber, secondNumber);
+            System.out.println("What is the result?");
             System.out.print("Answer: ");
             int resultOfUser = this.scanner.nextInt();
 
@@ -125,9 +125,8 @@ public class MathThinkingFast {
         System.out.println(" - Your name: " + name);
         System.out.printf(" - Your game.score: %d/%d\n", score, maxQuestion);
         System.out.println(" - Your time: " + timeInUsedBySecond + " s.");
-        System.out.println(" * Your game.score will be saved.");
         scoreManager.saveScore(mode, name, score, timeInUsedBySecond); // Call function to save score in game
-        System.out.println(" * Your game.score was saved.");
+        System.out.println(" - Your score was saved.");
         System.out.println("[Game Over] ---------------------------------------");
     }
 }
