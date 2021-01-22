@@ -1,12 +1,15 @@
 package game;
 
 import com.google.common.base.Stopwatch;
+import game.enums.MathOperation;
 import game.score.ScoreManager;
 
 import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
+
+import static game.enums.MathOperation.*;
 
 public class MathThinkingFast {
     private final ScoreManager scoreManager;
@@ -99,21 +102,64 @@ public class MathThinkingFast {
         Stopwatch stopWatch = Stopwatch.createStarted(); // Start stopwatch to working mode
         int maxQuestion = 10;
         for (int i = 1; i <= maxQuestion; i++) {
+            int operationNumber = random.nextInt(3);
+            MathOperation operation = Plus;
+            double answer;
+            switch (operationNumber) {
+                case 0:
+                    operation = Plus;
+                    break;
+                case 1:
+                    operation = Subtract;
+                    break;
+                case 2:
+                    operation = Multiply;
+                    break;
+                case 3:
+                    operation = MathOperation.Divided;
+                    break;
+            }
+
             int firstNumber = random.nextInt(maximumNumber);
             int secondNumber = random.nextInt(maximumNumber);
-            int answer = firstNumber + secondNumber;
+            while (operation == Divided && secondNumber == 0) {
+                secondNumber = random.nextInt(maximumNumber);
+            }
+            String operationSign = "+";
+
+            switch (operation) {
+                case Plus:
+                    answer = firstNumber + secondNumber;
+                    operationSign = "+";
+                    break;
+                case Subtract:
+                    answer = firstNumber - secondNumber;
+                    operationSign = "-";
+                    break;
+                case Multiply:
+                    answer = firstNumber * secondNumber;
+                    operationSign = "x";
+                    break;
+                case Divided:
+                    answer = firstNumber / secondNumber;
+                    operationSign = "/";
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + operation);
+            }
+            
 
             System.out.printf("[%d] ---------------------------------------%n", i);
-            System.out.format("%d + %d = ?%n", firstNumber, secondNumber);
+            System.out.format("%d %s %d = ?%n", firstNumber, operationSign, secondNumber);
             System.out.println("What is the result?");
             System.out.print("Answer: ");
-            int resultOfUser = this.scanner.nextInt();
+            double resultOfUser = this.scanner.nextDouble();
 
             if (answer == resultOfUser) { // Check result and answer is correct?
                 System.out.println("Correct.");
                 score++;
             } else {
-                System.out.println("Incorrect.");
+                System.out.println("Incorrect. - " + answer);
             }
         }
 
