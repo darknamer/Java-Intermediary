@@ -1,10 +1,8 @@
-import game.MathThinkingFast;
-
-import java.io.IOException;
+import game.BingoGame;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        MathThinkingFast mathThinkingFast = new MathThinkingFast();
-        mathThinkingFast.initial();
+    public static void main(String[] args) {
+        BingoGame bingo = new BingoGame();
+        bingo.run();
     }
 }
