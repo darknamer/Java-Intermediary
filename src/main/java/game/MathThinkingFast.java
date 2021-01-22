@@ -1,6 +1,7 @@
 package game;
 
 import com.google.common.base.Stopwatch;
+import game.enums.MathOperation;
 import game.score.ScoreManager;
 
 import java.io.IOException;
@@ -8,7 +9,7 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-import static game.MathOperation.*;
+import static game.enums.MathOperation.*;
 
 public class MathThinkingFast {
     private final ScoreManager scoreManager;
